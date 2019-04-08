@@ -2,15 +2,12 @@ import { Component } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 
-import { map, delay } from 'rxjs/operators';
-
 import {
   GET_MEETUPS,
   CREATE_MEETUP,
   UPDATE_MEETUP,
   DELETE_MEETUP
 } from './graphql';
-
 
 @Component({
   selector: 'my-app',
