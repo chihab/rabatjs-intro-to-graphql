@@ -54,16 +54,18 @@ export class AppComponent {
   }
 
   onDelete(meetup) {
-    this.apollo.mutate({
-      mutation: DELETE_MEETUP,
-      variables: {
-        meetup: meetup.id
-      },
-      refetchQueries: [{ query: GET_MEETUPS }]
-    })
-      .subscribe(
-        (data) => alert('OK !'),
-        (error) => alert(error) // o_O
-      );
+    if (confirm('Are you sure ?')) {
+      this.apollo.mutate({
+        mutation: DELETE_MEETUP,
+        variables: {
+          meetup: meetup.id
+        },
+        refetchQueries: [{ query: GET_MEETUPS }]
+      })
+        .subscribe(
+          (data) => alert('OK !'),
+          (error) => alert(error) // o_O
+        );
+    }
   }
 }
