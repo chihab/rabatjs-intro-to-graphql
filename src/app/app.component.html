@@ -7,7 +7,8 @@
     Text
     <textarea name="text" [(ngModel)]="meetup.text" ></textarea>
   </label>
-  <button> {{ meetup.id ? 'Update' : 'Create'}} </button>
+  <button > {{ meetup.id ? 'Update' : 'Create'}} </button>
+  <button class="cancel" *ngIf="meetup.id" (click)="onCancel()"> Cancel </button>
 </form>  
 
 <ng-container *ngIf="query$ | async as response">
@@ -20,7 +21,7 @@
 		<h2>Loading....</h2>
 	</div>
 
-	<div class="panel" *ngFor="let m of response?.data?.meetups">
+	<div (click)="onEdit(m)" class="panel point" [ngClass]="{transparent: meetup.id === m.id}" *ngFor="let m of response?.data?.meetups">
 		<h3>{{ m.title }}</h3>
 		<p>
 			{{ m.text }}

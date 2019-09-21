@@ -26,7 +26,9 @@ export class AppModule {
     });
     apollo.create({
       link,
-      cache: new InMemoryCache()
+      cache: new InMemoryCache({
+        dataIdFromObject: object => object.id
+      })
     });
   }
 }

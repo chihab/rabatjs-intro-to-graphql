@@ -7,6 +7,14 @@ $primary-color: orange;
   box-shadow: 1px 1px $primary-color;
 }
 
+.point {
+  cursor: pointer;
+}
+
+.transparent {
+  opacity: 0.5;
+}
+
 button {
   cursor: pointer;
   border: 1px solid $primary-color;
@@ -14,6 +22,9 @@ button {
   padding: 10px 30px;
   box-shadow: 1px 1px $primary-color;
   &:hover {
+    background-color: lightgrey;
+  }
+  &.cancel {
     background-color: lightgrey;
   }
 }

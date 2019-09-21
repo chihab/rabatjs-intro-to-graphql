@@ -23,11 +23,19 @@ export class AppComponent {
   query$: Observable<any>;
 
   constructor(private apollo: Apollo) {
-    this.query$ = this.apollo.watchQuery(
+  }
+
+  ngOnInit() {
+    this.query$ = this.apollo.watchQuery<any>(
       {
         query: GET_MEETUPS,
       }
     ).valueChanges
+
+    this.query$
+      .subscribe(({ data, loading }) => {
+        console.log(data);
+      });
   }
 
   onSave() {
@@ -36,8 +44,7 @@ export class AppComponent {
       mutation: this.meetup.id ? UPDATE_MEETUP : CREATE_MEETUP,
       variables: {
         meetup: id ? { id, title, text } : { title, text }
-      },
-      refetchQueries: [{ query: GET_MEETUPS }]
+      }
     })
       .subscribe(
         (data) => this.meetup = {
@@ -51,6 +58,14 @@ export class AppComponent {
 
   onEdit(meetup) {
     this.meetup = { ...meetup };
+  }
+
+  onCancel() {
+    this.meetup = {
+      id: null,
+      title: '',
+      text: ''
+    };
   }
 
   onDelete(meetup) {
